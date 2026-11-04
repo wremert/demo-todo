@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "A simple task list hosted on GitHub Pages",
   "scripts": {
-    "lint": "eslint app.js"
+    "lint": "eslint app.js",
+    "test": "node --test"
   },
   "devDependencies": {
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "jsdom": "^30.1.3"
   }
 }
