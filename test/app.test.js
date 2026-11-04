@@ -46,6 +46,17 @@ test('starts with an empty list when nothing is stored', () => {
     assert.deepEqual(app.texts(), []);
 });
 
+for (const [kind, stored] of [['invalid JSON', '{broken'], ['JSON that is not a list', '{"text":"A"}']]) {
+    test(`starts empty instead of crashing when stored data is ${kind}, and keeps a backup`, () => {
+        const app = openApp(stored);
+        assert.deepEqual(app.texts(), []);
+        assert.equal(app.remaining(), 0);
+        app.add('New');
+        assert.deepEqual(app.stored().map((t) => t.text), ['New']);
+        assert.equal(app.doc.defaultView.localStorage.getItem('tasks-backup'), stored);
+    });
+}
+
 test('adds a task, shows it and saves it', () => {
     const app = openApp();
     app.add('Buy milk');

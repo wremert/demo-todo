@@ -3,9 +3,23 @@ const input = document.getElementById('task-input');
 const list = document.getElementById('task-list');
 const remaining = document.getElementById('remaining');
 
-// Tasks saved before "done" existed have no flag; treat them as not done.
-let tasks = (JSON.parse(localStorage.getItem('tasks')) || [])
-    .map((task) => ({ ...task, done: Boolean(task.done) }));
+function loadTasks() {
+    const raw = localStorage.getItem('tasks');
+    try {
+        const saved = JSON.parse(raw) ?? [];
+        if (Array.isArray(saved)) {
+            // Tasks saved before "done" existed have no flag; treat them as not done.
+            return saved.map((task) => ({ ...task, done: Boolean(task.done) }));
+        }
+    } catch {
+        // Unreadable JSON: handled below.
+    }
+    // Keep the unreadable data so the next save doesn't destroy it.
+    localStorage.setItem('tasks-backup', raw);
+    return [];
+}
+
+let tasks = loadTasks();
 
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
