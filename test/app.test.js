@@ -67,3 +67,11 @@ test('tasks survive a reload', () => {
     ['A', 'B'].forEach(app.add);
     assert.deepEqual(app.reload().texts(), ['A', 'B']);
 });
+
+test('shows task text literally instead of running it as HTML', () => {
+    const evil = '<img src=x onerror="alert(1)">';
+    const app = openApp();
+    app.add(evil);
+    assert.deepEqual(app.texts(), [evil]);
+    assert.equal(app.doc.querySelector('#task-list img'), null);
+});

@@ -15,9 +15,10 @@ function renderTasks() {
         const li = document.createElement('li');
         li.className = 'task-item';
         li.innerHTML = `
-            <span class="task-text">${task.text}</span>
+            <span class="task-text"></span>
             <button class="delete-btn" data-index="${index}">Delete</button>
         `;
+        li.querySelector('.task-text').textContent = task.text;
         list.appendChild(li);
     });
 }
