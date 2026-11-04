@@ -1,0 +1,11 @@
+{
+  "name": "task-list",
+  "version": "1.0.0",
+  "description": "A simple task list hosted on GitHub Pages",
+  "scripts": {
+    "lint": "eslint app.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
