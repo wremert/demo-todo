@@ -8,7 +8,7 @@ A simple task list that runs in the browser and saves tasks locally.
 
 ## What it does
 
-Add and delete tasks. Everything is saved to localStorage, so your tasks are still there when you reload the page.
+Add and delete tasks, and tick them off when they're done. Done tasks move to the bottom, and a counter shows how many are left. Everything is saved to localStorage, so your tasks are still there when you reload the page.
 
 ---
 
@@ -38,6 +38,14 @@ Open `index.html` directly in your browser. Or start a local server:
 ```bash
 npx serve .
 ```
+
+### Tests
+
+```bash
+npm test
+```
+
+Runs the real `index.html`, `app.js` and `style.css` in jsdom. Run it before every change is considered done.
 
 ---
 
